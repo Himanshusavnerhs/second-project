@@ -1,0 +1,11 @@
+# Automate with cron
+To run it daily at 1 AM, add this line to root’s crontab:
+
+bash
+Copy
+Edit
+sudo crontab -e
+c
+Copy
+Edit
+0 1 * * * /path/to/log-archiver.sh >> /var/log/log-archiver.log 2>&1
