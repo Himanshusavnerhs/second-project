@@ -1,0 +1,19 @@
+▶️ How to Use:
+Save the script:
+
+bash
+Copy
+Edit
+nano log-archiver.sh
+Make it executable:
+
+bash
+Copy
+Edit
+chmod +x log-archiver.sh
+Run manually (as root or using sudo):
+
+bash
+Copy
+Edit
+sudo ./log-archiver.sh
