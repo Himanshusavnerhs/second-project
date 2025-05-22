@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Define locations
+LOG_DIR="/var/log"
+ARCHIVE_DIR="/var/log/archive"
+DATE=$(date +"%Y-%m-%d_%H-%M-%S")
+
+# Create archive directory if it doesn't exist
+mkdir -p "$ARCHIVE_DIR"
+
+# Create a temporary directory for this archive operation
+TEMP_DIR="/tmp/logs_$DATE"
+mkdir -p "$TEMP_DIR"
+
+echo "Archiving logs from $LOG_DIR to $ARCHIVE_DIR on $DATE"
+
+# Find all *.log files, copy to temp folder
+find "$LOG_DIR" -type f -name "*.log" -exec cp --parents {} "$TEMP_DIR" \;
+
+# Compress the logs
+ARCHIVE_FILE="$ARCHIVE_DIR/logs_$DATE.tar.gz"
+tar -czf "$ARCHIVE_FILE" -C "$TEMP_DIR" .
+
+# Clean up temp files
+rm -rf "$TEMP_DIR"
+
+# (Optional) Uncomment below line to remove original logs after archiving
+# find "$LOG_DIR" -type f -name "*.log" -exec truncate -s 0 {} \;
+
+echo "Logs archived to $ARCHIVE_FILE"
